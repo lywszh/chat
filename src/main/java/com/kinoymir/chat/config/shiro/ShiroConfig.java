@@ -14,12 +14,12 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(joyreadShiroRealm());
+        securityManager.setRealm(chatRealm());
         return securityManager;
     }
 
     @Bean
-    public ChatRelam joyreadShiroRealm() {
+    public ChatRelam chatRealm() {
         return new ChatRelam();
     }
 
@@ -31,8 +31,6 @@ public class ShiroConfig {
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/user/notLogin");
-        // 登录成功后要跳转的链接
-//        shiroFilterFactoryBean.setSuccessUrl("/user/loginSuccess");
         // 未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/user/403");
 
@@ -41,8 +39,6 @@ public class ShiroConfig {
 
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/user/register", "anon");
-        // 配置退出过滤器
-//        filterChainDefinitionMap.put("/user/logout", "logout");
 
         //不需要验证身份
         //filterChainDefinitionMap.put("/user", "anon");
