@@ -52,7 +52,7 @@ public interface FriendService {
      *
      * @return
      */
-    List<FriendApply> findByReceive();
+    List<FriendApply> findByReceive(Long userId);
 
     /**
      * 通过用户获取其好友列表（未删除的）（排序按照，亲密好友，好友名称顺序）
@@ -75,9 +75,9 @@ public interface FriendService {
      * 取消好友关系（只是逻辑删除，保留备注和亲密状态，必要时恢复）
      *
      * @param cancelId
-     * @param friendId
+     * @param myselfId
      */
-    void cancelShip(Long cancelId, Long friendId);
+    void cancelShip(Long cancelId, Long myselfId);
 
     /**
      * 获取好友关系记录

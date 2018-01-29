@@ -2,12 +2,22 @@ package com.kinoymir.chat.controller.friend;
 
 import com.kinoymir.chat.common.JsonResult;
 import com.kinoymir.chat.controller.BaseController;
+import com.kinoymir.chat.entity.friend.FriendApply;
+import com.kinoymir.chat.entity.friend.FriendShip;
+import com.kinoymir.chat.service.friend.FriendService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/friend")
 public class FriendController extends BaseController {
+
+    @Autowired
+    private FriendService fs;
+
     /**
      * 新建好友申请
      *
@@ -16,6 +26,8 @@ public class FriendController extends BaseController {
      */
     @RequestMapping("/sendApply")
     public JsonResult sendApply(Long userId) {
+        Long myselfId=getUserIdFromCache();
+        fs.createShip(myselfId,userId);
         return new JsonResult().success();
     }
 
@@ -26,7 +38,9 @@ public class FriendController extends BaseController {
      */
     @RequestMapping("/listApply")
     public JsonResult applyList() {
-        return new JsonResult().success();
+        Long myselfId=getUserIdFromCache();
+        List<FriendApply> fas=fs.findByReceive(myselfId);
+        return new JsonResult().success().dataObj(fas);
     }
 
     /**
@@ -37,6 +51,8 @@ public class FriendController extends BaseController {
      */
     @RequestMapping("/affirmApply")
     public JsonResult affirmApply(Long id) {
+        Long myselfId=getUserIdFromCache();
+        fs.affirmApply(myselfId,id);
         return new JsonResult().success();
     }
 
@@ -48,6 +64,8 @@ public class FriendController extends BaseController {
      */
     @RequestMapping("/refuseApply")
     public JsonResult refuseApply(Long id) {
+        Long myselfId=getUserIdFromCache();
+        fs.refuseApply(myselfId,id);
         return new JsonResult().success();
     }
 
@@ -58,7 +76,9 @@ public class FriendController extends BaseController {
      */
     @RequestMapping("/shipList")
     public JsonResult shipList() {
-        return new JsonResult().success();
+        Long myselfId=getUserIdFromCache();
+        List<FriendShip> fss=fs.findByMyself(myselfId);
+        return new JsonResult().success().dataObj(fss);
     }
 
     /**
@@ -67,7 +87,9 @@ public class FriendController extends BaseController {
      * @return
      */
     @RequestMapping("/shipDel")
-    public JsonResult delShip() {
+    public JsonResult delShip(Long id) {
+        Long myselfId=getUserIdFromCache();
+        fs.cancelShip(id,myselfId);
         return new JsonResult().success();
     }
 
@@ -80,6 +102,7 @@ public class FriendController extends BaseController {
      */
     @RequestMapping("/shipRemark")
     public JsonResult remarkShip(Long shipId, String remark) {
+        fs.editShipRemark(shipId,remark);
         return new JsonResult().success();
     }
 
@@ -91,6 +114,7 @@ public class FriendController extends BaseController {
      */
     @RequestMapping("/shipCloseStatus")
     public JsonResult closeStatusShip(Long shipId) {
+        fs.editShipCloseFriend(shipId);
         return new JsonResult().success();
     }
 

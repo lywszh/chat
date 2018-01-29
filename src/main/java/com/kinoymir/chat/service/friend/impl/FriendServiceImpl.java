@@ -3,9 +3,12 @@ package com.kinoymir.chat.service.friend.impl;
 import com.kinoymir.chat.entity.friend.FriendApply;
 import com.kinoymir.chat.entity.friend.FriendShip;
 import com.kinoymir.chat.service.friend.FriendService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class FriendServiceImpl implements FriendService {
     /**
      * 发送好友申请，创建好友申请
@@ -69,7 +72,7 @@ public class FriendServiceImpl implements FriendService {
      * @return
      */
     @Override
-    public List<FriendApply> findByReceive() {
+    public List<FriendApply> findByReceive(Long userId) {
         return null;
     }
 
@@ -100,10 +103,10 @@ public class FriendServiceImpl implements FriendService {
      * 取消好友关系（只是逻辑删除，保留备注和亲密状态，必要时恢复）
      *
      * @param cancelId
-     * @param friendId
+     * @param myselfId
      */
     @Override
-    public void cancelShip(Long cancelId, Long friendId) {
+    public void cancelShip(Long cancelId, Long myselfId) {
 
     }
 
