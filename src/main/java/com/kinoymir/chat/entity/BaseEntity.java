@@ -26,9 +26,9 @@ public class BaseEntity implements Serializable {
     @JsonIgnore
     private Long version;
 
-    @Column(name = "deleted")
+    @Column(name = "is_deleted")
     @JsonIgnore
-    private boolean is_deleted;
+    private boolean deleted;
 
     @Convert(converter = TimeConverter.class)
     @JsonIgnore
