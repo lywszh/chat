@@ -1,5 +1,6 @@
 package com.kinoymir.chat.service.user;
 
+import com.kinoymir.chat.config.shiro.MyShiroToken;
 import com.kinoymir.chat.entity.user.User;
 import com.kinoymir.chat.entity.user.UserExtra;
 
@@ -7,7 +8,7 @@ public interface UserService {
     /**
      * 用户注册
      */
-    User createUser(User user);
+    User register(User user);
 
     /**
      * 创建用户关联信息
@@ -19,27 +20,25 @@ public interface UserService {
     /**
      * 用户登录
      */
-//    void login();
+    User login(MyShiroToken token);
 
 
     /**
      * 修改用户的邮箱或密码
      *
+     * @param id
      * @param user
-     * @param email
-     * @param pwd
      */
-    void editUser(User user, String email, String pwd);
+    void editUser(Long id, User user);
 
 
     /**
-     * 修改用户的头像或个性签名
+     * 修改用户的额外信息
      *
-     * @param user
-     * @param code
-     * @param personNote
+     * @param UserId
+     * @param userExtra
      */
-    void editUserExtra(User user, Integer code, String personNote);
+    void editUserExtra(Long userId, UserExtra userExtra);
 
     /**
      * 通过id获取用户

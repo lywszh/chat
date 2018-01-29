@@ -30,6 +30,11 @@ public class User extends BaseEntity {
     @Pattern(regexp = "^(1[34578]\\d{9})$", message = "手机格式错误")
     private String cellPhone;
 
+
+    @NotBlank(message = "用户名不能为空")
+    @Length(max=8,message = "用户名过长")
+    private String name;
+
     /**
      * 注册时间
      */

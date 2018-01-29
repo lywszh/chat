@@ -16,8 +16,6 @@ public class UserExtra extends BaseEntity {
      */
     private Long userId;
 
-    @NotBlank(message = "用户名不能为空")
-    @Length(max = 8, message = "用户名过长")
     private String name;
 
     /**
