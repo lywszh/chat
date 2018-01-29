@@ -20,7 +20,6 @@ public class UserExtra extends BaseEntity {
 
     private String name;
 
-
     private String email;
 
     private String cellPhone;
@@ -36,14 +35,14 @@ public class UserExtra extends BaseEntity {
      */
     private Integer avatarCode;
 
-    public UserExtra(){
+    public UserExtra() {
 
     }
 
-    public UserExtra(User user){
-        this.userId=user.getId();
-        this.name=user.getName();
-        this.cellPhone=user.getCellPhone();
-        this.email=user.getEmail();
+    public UserExtra(User user) {
+        this.userId = user.getId();
+        this.name = user.getName();
+        this.cellPhone = user.getCellPhone();
+        this.email = user.getEmail();
     }
 }

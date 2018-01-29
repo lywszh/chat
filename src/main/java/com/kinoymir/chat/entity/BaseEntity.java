@@ -23,6 +23,7 @@ public class BaseEntity implements Serializable {
     private Long id;
 
     @Version
+    @JsonIgnore
     private Long version;
 
     @Column(name = "deleted")

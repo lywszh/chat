@@ -95,4 +95,14 @@ public class UserController extends BaseController {
         return new JsonResult().success();
     }
 
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @GetMapping("/info")
+    public JsonResult info(){
+        UserExtra ue =us.findByUserId(getUserIdFromCache());
+        return new JsonResult().success().dataObj(ue);
+    }
+
 }
