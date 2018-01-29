@@ -2,10 +2,12 @@ package com.kinoymir.chat.entity.user;
 
 import com.kinoymir.chat.entity.BaseEntity;
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 
 @Entity(name = "user_extra")
 @Data
@@ -18,6 +20,10 @@ public class UserExtra extends BaseEntity {
 
     private String name;
 
+
+    private String email;
+
+    private String cellPhone;
     /**
      * 个人说明，限制50字以内
      */
@@ -29,4 +35,15 @@ public class UserExtra extends BaseEntity {
      * 头像编号
      */
     private Integer avatarCode;
+
+    public UserExtra(){
+
+    }
+
+    public UserExtra(User user){
+        this.userId=user.getId();
+        this.name=user.getName();
+        this.cellPhone=user.getCellPhone();
+        this.email=user.getEmail();
+    }
 }

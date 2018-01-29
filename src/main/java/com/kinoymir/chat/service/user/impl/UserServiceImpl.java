@@ -46,8 +46,9 @@ public class UserServiceImpl implements UserService {
             throw new ChatRuntimeException("用户名已被使用");
         }
         user.setRegisterTime(LocalDateTime.now());
+        user =ud.save(user);
         createUserExtra(user);
-        return ud.save(user);
+        return user;
     }
 
     /**
@@ -61,9 +62,7 @@ public class UserServiceImpl implements UserService {
         if (userId == null) {
             throw new ChatRuntimeException("用户id为空");
         }
-        UserExtra ue = new UserExtra();
-        ue.setUserId(userId);
-        ue.setName(user.getName());
+        UserExtra ue = new UserExtra(user);
         return ued.save(ue);
     }
 
