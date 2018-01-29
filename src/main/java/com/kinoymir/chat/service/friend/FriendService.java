@@ -24,6 +24,14 @@ public interface FriendService {
     FriendApply findApplyById(Long id);
 
     /**
+     * 确认是否为本人操作好友申请
+     *
+     * @param userId
+     * @param applyId
+     */
+    void checkApplyLegal(Long userId, Long applyId);
+
+    /**
      * 确认好友申请
      *
      * @param userId
@@ -81,6 +89,7 @@ public interface FriendService {
 
     /**
      * 获取好友关系记录
+     *
      * @param id
      * @return
      */
@@ -96,19 +105,22 @@ public interface FriendService {
 
     /**
      * 恢复好友关系
+     *
      * @param id
      */
     void recoverShip(Long id);
 
     /**
      * 修改好友备注
+     *
      * @param id
      * @param remark
      */
-    void editShipRemark(Long id ,String remark);
+    void editShipRemark(Long id, String remark);
 
     /**
      * 修改好友亲密状态
+     *
      * @param id
      */
     void editShipCloseFriend(Long id);

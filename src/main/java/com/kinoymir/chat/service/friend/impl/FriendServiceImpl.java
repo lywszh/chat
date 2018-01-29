@@ -1,15 +1,27 @@
 package com.kinoymir.chat.service.friend.impl;
 
+import com.kinoymir.chat.common.ChatRuntimeException;
+import com.kinoymir.chat.dao.friend.FriendApplyDao;
+import com.kinoymir.chat.dao.friend.FriendShipDao;
 import com.kinoymir.chat.entity.friend.FriendApply;
 import com.kinoymir.chat.entity.friend.FriendShip;
 import com.kinoymir.chat.service.friend.FriendService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 @Transactional
 public class FriendServiceImpl implements FriendService {
+    @Autowired
+    private FriendApplyDao fad;
+
+    @Autowired
+    private FriendShipDao fsd;
+
+
     /**
      * 发送好友申请，创建好友申请
      *
@@ -19,7 +31,12 @@ public class FriendServiceImpl implements FriendService {
      */
     @Override
     public FriendApply createApply(Long sendId, Long receiverId) {
-        return null;
+        FriendApply fa = fad.findBySendIdAndReceiverId(sendId, receiverId);
+        if (fa != null) {
+            return fa;
+        }
+        fa = new FriendApply(sendId, receiverId);
+        return fad.save(fa);
     }
 
     /**
@@ -30,7 +47,25 @@ public class FriendServiceImpl implements FriendService {
      */
     @Override
     public FriendApply findApplyById(Long id) {
-        return null;
+        FriendApply fa = fad.findOne(id);
+        if (fa == null) {
+            throw new ChatRuntimeException("好友申请不存在");
+        }
+        return fa;
+    }
+
+    /**
+     * 确认是否为本人操作好友申请
+     *
+     * @param userId
+     * @param applyId
+     */
+    @Override
+    public void checkApplyLegal(Long userId, Long applyId) {
+        FriendApply fa = findApplyById(applyId);
+        if(fa.getReceiverId()!=userId){
+            throw new ChatRuntimeException("非本人操作");
+        }
     }
 
     /**
@@ -41,6 +76,7 @@ public class FriendServiceImpl implements FriendService {
      */
     @Override
     public void affirmApply(Long userId, Long applyId) {
+        checkApplyLegal(userId,applyId);
 
     }
 
@@ -52,7 +88,8 @@ public class FriendServiceImpl implements FriendService {
      */
     @Override
     public void refuseApply(Long userId, Long applyId) {
-
+        checkApplyLegal(userId,applyId);
+        delById(applyId);
     }
 
     /**
@@ -63,7 +100,8 @@ public class FriendServiceImpl implements FriendService {
      */
     @Override
     public void delById(Long id) {
-
+        FriendApply fa = findApplyById(id);
+        fad.delete(id);
     }
 
     /**

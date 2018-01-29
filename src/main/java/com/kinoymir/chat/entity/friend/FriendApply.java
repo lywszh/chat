@@ -1,15 +1,18 @@
 package com.kinoymir.chat.entity.friend;
 
 import com.kinoymir.chat.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Entity;
 
-@Data
-@Entity
+
 /**
  * 好友申请表
  */
+@Data
+@Entity
+@AllArgsConstructor
 public class FriendApply extends BaseEntity{
 
     /**

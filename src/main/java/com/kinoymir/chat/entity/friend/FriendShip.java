@@ -25,7 +25,7 @@ public class FriendShip extends BaseEntity {
     /**
      * 是否为亲密好友
      */
-    @Column(name="is_closeFriend")
+    @Column(name = "is_closeFriend")
     private boolean closeFriend;
 
     /**
