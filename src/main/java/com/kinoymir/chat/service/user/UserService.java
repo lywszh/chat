@@ -35,7 +35,7 @@ public interface UserService {
     /**
      * 修改用户的额外信息
      *
-     * @param UserId
+     * @param userId
      * @param userExtra
      */
     void editUserExtra(Long userId, UserExtra userExtra);
@@ -55,4 +55,25 @@ public interface UserService {
      * @return
      */
     UserExtra findByUserId(Long id);
+
+    /**
+     * 检验此邮箱是否可以使用
+     *
+     * @param email
+     */
+    void checkEmail(String email);
+
+    /**
+     * 检验此手机号是否可以使用
+     *
+     * @param cellPhone
+     */
+    void checkCellPhone(String cellPhone);
+
+    /**
+     * 检验此名字是否可以使用
+     *
+     * @param name
+     */
+    void checkName(String name);
 }

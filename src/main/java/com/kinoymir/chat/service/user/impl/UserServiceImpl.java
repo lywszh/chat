@@ -33,20 +33,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User register(User user) {
-        User user_tmp = ud.findByCellPhone(user.getCellPhone());
-        if (user_tmp != null) {
-            throw new ChatRuntimeException("手机号已被使用");
-        }
-        user_tmp = ud.findByEmail(user.getEmail());
-        if (user_tmp != null) {
-            throw new ChatRuntimeException("邮箱已被使用");
-        }
-        user_tmp = ud.findByName(user.getName());
-        if (user_tmp != null) {
-            throw new ChatRuntimeException("用户名已被使用");
-        }
+        checkCellPhone(user.getCellPhone());
+        checkEmail(user.getEmail());
+        checkName(user.getName());
         user.setRegisterTime(LocalDateTime.now());
-        user =ud.save(user);
+        user = ud.save(user);
         createUserExtra(user);
         return user;
     }
@@ -98,11 +89,16 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void editUser(Long id, User user) {
-        User user_old=findById(id);
-        if(StringUtils.hasText(user.getEmail())){
-            user_old.setEmail(user.getEmail());
+        User user_old = findById(id);
+        String email=user.getEmail();
+        if (StringUtils.hasText(email)) {
+            checkEmail(email);
+            user_old.setEmail(email);
+            UserExtra ue =findByUserId(user_old.getId());
+            ue.setEmail(email);
+            ued.save(ue);
         }
-        if(StringUtils.hasText(user.getPwd())){
+        if (StringUtils.hasText(user.getPwd())) {
             user_old.setPwd(user.getPwd());
         }
         ud.save(user_old);
@@ -116,11 +112,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void editUserExtra(Long userId, UserExtra userExtra) {
-        UserExtra userExtra_old=findByUserId(userId);
-        if(StringUtils.hasText(userExtra.getPersonNote())){
+        UserExtra userExtra_old = findByUserId(userId);
+        if (StringUtils.hasText(userExtra.getPersonNote())) {
             userExtra_old.setPersonNote(userExtra.getPersonNote());
         }
-        if(null!=userExtra.getAvatarCode()){
+        if (null != userExtra.getAvatarCode()) {
             userExtra_old.setAvatarCode(userExtra.getAvatarCode());
         }
         ued.save(userExtra_old);
@@ -135,8 +131,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User findById(Long id) {
-        User user  = ud.findOne(id);
-        if(user==null){
+        User user = ud.findOne(id);
+        if (user == null) {
             throw new ChatRuntimeException("用户不存在");
         }
         return user;
@@ -151,5 +147,44 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserExtra findByUserId(Long id) {
         return ued.findByUserId(id);
+    }
+
+    /**
+     * 检验此邮箱是否可以使用
+     *
+     * @param email
+     */
+    @Override
+    public void checkEmail(String email) {
+        User user_tmp = ud.findByEmail(email);
+        if (user_tmp != null) {
+            throw new ChatRuntimeException("邮箱已被使用");
+        }
+    }
+
+    /**
+     * 检验此手机号是否可以使用
+     *
+     * @param cellPhone
+     */
+    @Override
+    public void checkCellPhone(String cellPhone) {
+        User user_tmp = ud.findByCellPhone(cellPhone);
+        if (user_tmp != null) {
+            throw new ChatRuntimeException("手机号已被使用");
+        }
+    }
+
+    /**
+     * 检验此名字是否可以使用
+     *
+     * @param name
+     */
+    @Override
+    public void checkName(String name) {
+        User user_tmp = ud.findByName(name);
+        if (user_tmp != null) {
+            throw new ChatRuntimeException("用户名已被使用");
+        }
     }
 }
