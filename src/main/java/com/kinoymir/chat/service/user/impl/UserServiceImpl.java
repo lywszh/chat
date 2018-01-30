@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 用户注册
      *
-     * @param user
+     * @param user 用户表
      */
     @Override
     public User register(User user) {
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 创建用户关联信息
      *
-     * @param user
+     * @param user 用户表
      */
     @Override
     public UserExtra createUserExtra(User user) {
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 用户登录
      *
-     * @param token
+     * @param token shiro封装的用户信息
      */
     @Override
     public User login(MyShiroToken token) {
@@ -84,8 +84,8 @@ public class UserServiceImpl implements UserService {
     /**
      * 修改用户的邮箱或密码
      *
-     * @param id
-     * @param user
+     * @param id 用户id
+     * @param user 传入的用户信息
      */
     @Override
     public void editUser(Long id, User user) {
@@ -107,8 +107,8 @@ public class UserServiceImpl implements UserService {
     /**
      * 修改用户的额外信息
      *
-     * @param userId
-     * @param userExtra
+     * @param userId 用户id
+     * @param userExtra 用户的额外信息
      */
     @Override
     public void editUserExtra(Long userId, UserExtra userExtra) {
@@ -126,8 +126,8 @@ public class UserServiceImpl implements UserService {
     /**
      * 通过id获取用户
      *
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 用户表
      */
     @Override
     public User findById(Long id) {
@@ -141,8 +141,8 @@ public class UserServiceImpl implements UserService {
     /**
      * 通过用户id获取其详细信息
      *
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 用户额外信息
      */
     @Override
     public UserExtra findByUserId(Long id) {
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 检验此邮箱是否可以使用
      *
-     * @param email
+     * @param email 邮箱
      */
     @Override
     public void checkEmail(String email) {
@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 检验此手机号是否可以使用
      *
-     * @param cellPhone
+     * @param cellPhone 手机
      */
     @Override
     public void checkCellPhone(String cellPhone) {
@@ -178,7 +178,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 检验此名字是否可以使用
      *
-     * @param name
+     * @param name 用户名
      */
     @Override
     public void checkName(String name) {

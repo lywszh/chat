@@ -13,12 +13,13 @@ public interface UserService {
     /**
      * 创建用户关联信息
      *
-     * @param user
+     * @param user 用户表
      */
     UserExtra createUserExtra(User user);
 
     /**
      * 用户登录
+     * @param  token shiro封装的用户信息
      */
     User login(MyShiroToken token);
 
@@ -26,8 +27,8 @@ public interface UserService {
     /**
      * 修改用户的邮箱或密码
      *
-     * @param id
-     * @param user
+     * @param id 用户id
+     * @param user 传入的用户信息
      */
     void editUser(Long id, User user);
 
@@ -35,45 +36,45 @@ public interface UserService {
     /**
      * 修改用户的额外信息
      *
-     * @param userId
-     * @param userExtra
+     * @param userId 用户id
+     * @param userExtra 用户额外信息
      */
     void editUserExtra(Long userId, UserExtra userExtra);
 
     /**
      * 通过id获取用户
      *
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 用户表
      */
     User findById(Long id);
 
     /**
      * 通过用户id获取其详细信息
      *
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 用户额外信息
      */
     UserExtra findByUserId(Long id);
 
     /**
      * 检验此邮箱是否可以使用
      *
-     * @param email
+     * @param email 邮箱
      */
     void checkEmail(String email);
 
     /**
      * 检验此手机号是否可以使用
      *
-     * @param cellPhone
+     * @param cellPhone 手机
      */
     void checkCellPhone(String cellPhone);
 
     /**
      * 检验此名字是否可以使用
      *
-     * @param name
+     * @param name 用户名
      */
     void checkName(String name);
 }
