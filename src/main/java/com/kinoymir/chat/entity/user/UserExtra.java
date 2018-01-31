@@ -2,6 +2,7 @@ package com.kinoymir.chat.entity.user;
 
 import com.kinoymir.chat.entity.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Entity;
 import javax.validation.constraints.Pattern;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity(name = "user_extra")
 @Data
 public class UserExtra extends BaseEntity {

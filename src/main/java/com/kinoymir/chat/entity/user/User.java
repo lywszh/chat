@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kinoymir.chat.config.TimeConverter;
 import com.kinoymir.chat.entity.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity(name = "user_user")
 @Data
 public class User extends BaseEntity {

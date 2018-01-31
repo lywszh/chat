@@ -3,6 +3,7 @@ package com.kinoymir.chat.entity.friend;
 import com.kinoymir.chat.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 
@@ -10,6 +11,7 @@ import javax.persistence.Entity;
 /**
  * 好友申请表
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @AllArgsConstructor
