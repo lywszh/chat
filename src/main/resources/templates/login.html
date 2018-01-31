@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template::head">
+</head>
+<body>
+<div class="container">
+    <form class="form-signin">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-4">
+            <h2 class="form-signin-heading">欢迎登录</h2>
+            <input type="email" id="inputPhoneOrEmail" class="form-control" placeholder="手机或邮箱" required="true"
+                   autofocus="true"/>
+            <input type="password" id="inputPassword" class="form-control" placeholder="密码" required="true"/>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me" id="remember-me"/> 记住我
+                </label>
+            </div>
+            <button class="btn btn-lg btn-default btn-block" type="button" id="sign-in">登录</button>
+        </div>
+        <div class="col-lg-4">
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    $("body").on("click","#sign-in",function () {
+        let phoneOrEmail=$("#inputPhoneOrEmail").val().trim();
+        let pwd =$("#inputPassword").val().trim();
+        let rememberMe=$("#remember-me").prop('check');
+    });
+
+</script>
+</html>
