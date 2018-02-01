@@ -3,6 +3,10 @@ package com.kinoymir.chat.service.user;
 import com.kinoymir.chat.config.shiro.MyShiroToken;
 import com.kinoymir.chat.entity.user.User;
 import com.kinoymir.chat.entity.user.UserExtra;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Map;
 
 public interface UserService {
     /**
@@ -19,7 +23,8 @@ public interface UserService {
 
     /**
      * 用户登录
-     * @param  token shiro封装的用户信息
+     *
+     * @param token shiro封装的用户信息
      */
     User login(MyShiroToken token);
 
@@ -27,7 +32,7 @@ public interface UserService {
     /**
      * 修改用户的邮箱或密码
      *
-     * @param id 用户id
+     * @param id   用户id
      * @param user 传入的用户信息
      */
     void editUser(Long id, User user);
@@ -36,7 +41,7 @@ public interface UserService {
     /**
      * 修改用户的额外信息
      *
-     * @param userId 用户id
+     * @param userId    用户id
      * @param userExtra 用户额外信息
      */
     void editUserExtra(Long userId, UserExtra userExtra);
@@ -77,4 +82,15 @@ public interface UserService {
      * @param name 用户名
      */
     void checkName(String name);
+
+    /**
+     * 后台，获取所有用户数据
+     *
+     * @param name      查询的用户名
+     * @param cellPhone 查询的手机号
+     * @param email     查询的邮箱号
+     * @param pageable  分页封装
+     * @return 返回封装的数据
+     */
+    Map<String, Object> listUser(String name, String cellPhone, String email, Pageable pageable);
 }
