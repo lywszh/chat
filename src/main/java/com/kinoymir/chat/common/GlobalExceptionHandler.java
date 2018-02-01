@@ -20,6 +20,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import java.util.Set;
+
 /**
  * 全局处理所有运行时异常
  *
@@ -101,6 +102,7 @@ public class GlobalExceptionHandler {
         logger.error("参数验证失败:{}", e.getMessage());
         return new JsonResult().failed("参数验证失败");
     }
+
     /**
      * 405 - Method Not Allowed
      */
@@ -136,7 +138,7 @@ public class GlobalExceptionHandler {
     /**
      * 500 - Internal Server Error
      */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    //@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public JsonResult handleException(Exception e) {

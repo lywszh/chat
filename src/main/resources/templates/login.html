@@ -9,7 +9,7 @@
         </div>
         <div class="col-lg-4">
             <h2 class="form-signin-heading">欢迎登录</h2>
-            <input type="email" id="inputPhoneOrEmail" class="form-control" placeholder="手机或邮箱" required="true"
+            <input type="email" id="inputPhone" class="form-control" placeholder="手机" required="true"
                    autofocus="true"/>
             <input type="password" id="inputPassword" class="form-control" placeholder="密码" required="true"/>
             <div class="checkbox">
@@ -25,10 +25,26 @@
 </div>
 </body>
 <script>
-    $("body").on("click","#sign-in",function () {
-        let phoneOrEmail=$("#inputPhoneOrEmail").val().trim();
-        let pwd =$("#inputPassword").val().trim();
-        let rememberMe=$("#remember-me").prop('check');
+    $("body").on("click", "#sign-in", function () {
+        let cellPhone = $("#inputPhone").val().trim();
+        let pwd = $("#inputPassword").val().trim();
+        let rememberMe = $("#remember-me").prop('checked');
+        $.ajax({
+                url: "/user/login",
+            type:"POST",
+                data: {cellPhone: cellPhone, pwd: pwd, rememberMe: rememberMe},
+                success: function (res) {
+                    if (res.result) {
+                        window.location = "/back/index";
+                    } else {
+                        layer.msg(res.message);
+                    }
+                },
+                error: function (res) {
+                }
+            }
+        );
+
     });
 
 </script>

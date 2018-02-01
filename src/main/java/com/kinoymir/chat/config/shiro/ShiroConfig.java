@@ -40,6 +40,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/user/register", "anon");
 
+        /**
+         * 后台登录页
+         */
+        filterChainDefinitionMap.put("/back/login", "anon");
         //不需要验证身份
         //filterChainDefinitionMap.put("/user", "anon");
 
@@ -47,6 +51,8 @@ public class ShiroConfig {
         // 需要验证身份
         filterChainDefinitionMap.put("/user/**", "authc");
 
+        // 需要验证身份
+        filterChainDefinitionMap.put("/back/**", "roles[admin]");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

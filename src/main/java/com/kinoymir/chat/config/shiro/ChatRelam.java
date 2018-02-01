@@ -12,6 +12,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
+import java.util.Set;
+
 //import org.springframework.beans.factory.annotation.Autowired;
 //
 public class ChatRelam extends AuthorizingRealm {
@@ -19,7 +22,12 @@ public class ChatRelam extends AuthorizingRealm {
     private UserService us;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        Long userId = (Long)principalCollection.fromRealm(getName()).iterator().next();
+        Set<String> roles =new HashSet<String>();
+        if(userId<10){
+            roles.add("admin");
+        }
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
         return info;
     }
 
