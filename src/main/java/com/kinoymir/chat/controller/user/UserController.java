@@ -42,7 +42,7 @@ public class UserController extends BaseController {
     @PostMapping("/register")
     public JsonResult register(@Validated @ModelAttribute User user) {
         User user_re=us.register(user);
-        setUserIntoCache(user_re);
+        setUserIntoCache(user_re,false);
         return new JsonResult().success();
     }
 
@@ -53,8 +53,8 @@ public class UserController extends BaseController {
      * @return
      */
     @PostMapping("/login")
-    public JsonResult login(@ModelAttribute User user) {
-        setUserIntoCache(user);
+    public JsonResult login(@ModelAttribute User user,boolean rememberMe) {
+        setUserIntoCache(user,rememberMe);
         return new JsonResult().success();
     }
 

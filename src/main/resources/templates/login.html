@@ -31,7 +31,7 @@
         let rememberMe = $("#remember-me").prop('checked');
         $.ajax({
                 url: "/user/login",
-            type:"POST",
+                type: "POST",
                 data: {cellPhone: cellPhone, pwd: pwd, rememberMe: rememberMe},
                 success: function (res) {
                     if (res.result) {

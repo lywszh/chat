@@ -23,8 +23,11 @@ public class BaseController {
      * 将用户ID存入缓存
      * @param user
      */
-    protected  void setUserIntoCache(User user){
+    protected  void setUserIntoCache(User user,boolean rememberMe){
         MyShiroToken token = new MyShiroToken(user);
+        if(rememberMe){
+            token.setRememberMe(true);
+        }
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
     }
