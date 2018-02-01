@@ -2,8 +2,10 @@ package com.kinoymir.chat.controller.back;
 
 import com.kinoymir.chat.common.JsonResult;
 import com.kinoymir.chat.controller.BaseController;
+import com.kinoymir.chat.entity.user.UserExtra;
 import com.kinoymir.chat.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -85,7 +87,7 @@ public class BackController extends BaseController {
     @ResponseBody
     public JsonResult listUserByPage(String name, String cellPhone, String email, int page, int size) {
         Pageable pageable = new PageRequest(page, size, new Sort(Sort.Direction.ASC, "id"));
-        Map<String, Object> map = us.listUser(name, cellPhone, email, pageable);
-        return new JsonResult().success().dataObj(map);
+        Page<UserExtra> pue = us.listUser(name, cellPhone, email, pageable);
+        return new JsonResult().success().dataObj(pue);
     }
 }

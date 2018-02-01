@@ -200,14 +200,9 @@ public class UserServiceImpl implements UserService {
      * @return 封装过的用户数据
      */
     @Override
-    public Map<String,Object> listUser(String name, String cellPhone, String email,Pageable pageable) {
+    public Page<UserExtra> listUser(String name, String cellPhone, String email,Pageable pageable) {
         Page<UserExtra> ueAll = ued.searchAll(pageable);
-        List<UserExtra> ues = ueAll.getContent();
-
-        ued.findByCellPhone("13777823482", pageable)
-        Map<String,Object> map =new HashMap<String,Object>(4);
-        map.put("content",ues);
-        map.put("total",ueAll.getTotalElements());
-        return map;
+        ued.findByCellPhone("13777823482", pageable);
+        return ueAll;
     }
 }

@@ -92,5 +92,5 @@ public interface UserService {
      * @param pageable  分页封装
      * @return 返回封装的数据
      */
-    Map<String, Object> listUser(String name, String cellPhone, String email, Pageable pageable);
+    Page<UserExtra> listUser(String name, String cellPhone, String email, Pageable pageable);
 }
