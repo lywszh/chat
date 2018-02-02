@@ -93,7 +93,7 @@ $(function () {
         /**
          * 点击按钮，重新加载数据
          */
-        $("body").on("click", " #reSearch", function () {
+        $("button").on("click", " #reSearch", function () {
             console.log("reSearch");
             loadUserList(1);
         });
