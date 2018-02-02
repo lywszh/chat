@@ -89,17 +89,17 @@ public class UserServiceImpl implements UserService {
     /**
      * 修改用户的邮箱或密码
      *
-     * @param id 用户id
+     * @param id   用户id
      * @param user 传入的用户信息
      */
     @Override
     public void editUser(Long id, User user) {
         User user_old = findById(id);
-        String email=user.getEmail();
+        String email = user.getEmail();
         if (StringUtils.hasText(email)) {
             checkEmail(email);
             user_old.setEmail(email);
-            UserExtra ue =findByUserId(user_old.getId());
+            UserExtra ue = findByUserId(user_old.getId());
             ue.setEmail(email);
             ued.save(ue);
         }
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 修改用户的额外信息
      *
-     * @param userId 用户id
+     * @param userId    用户id
      * @param userExtra 用户的额外信息
      */
     @Override
@@ -196,13 +196,39 @@ public class UserServiceImpl implements UserService {
     /**
      * 后台，获取所有用户数据
      *
-     * @param pageable
+     * @param pageable 封装的分页
      * @return 封装过的用户数据
      */
     @Override
-    public Page<UserExtra> listUser(String name, String cellPhone, String email,Pageable pageable) {
-        Page<UserExtra> ueAll = ued.searchAll(pageable);
-        ued.findByCellPhone("13777823482", pageable);
-        return ueAll;
+    public Page<UserExtra> listUser(String name, String cellPhone, String email, Pageable pageable) {
+        Page<UserExtra> pue = null;
+        /*
+         * 给name加上通配符
+         */
+        if(StringUtils.hasText(name)){
+            name="%"+name+"%";
+        }
+        /*
+         * 考虑过是用数字还是字符串。数字后期容易产生误解。故。
+         */
+        switch ((StringUtils.hasText(name) ? "1" : "0") + (StringUtils.hasText(cellPhone) ? "1" : "0") + (StringUtils.hasText(email) ? "1" : "0")) {
+            case "000": pue = ued.searchAll(pageable);
+                break;
+            case "001":pue=ued.findByEmail(email,pageable);
+                break;
+            case "010":pue=ued.findByCellPhone(cellPhone, pageable);
+                break;
+            case "100":pue=ued.findByNameLike(name, pageable);
+                break;
+            case "011":pue=ued.findByCellPhoneAndEmail(cellPhone,email,pageable);
+                break;
+            case "110":pue=ued.findByNameLikeAndCellPhone(name,cellPhone,pageable);
+                break;
+            case "101":pue=ued.findByNameLikeAndEmail(name, cellPhone, pageable);
+                break;
+            case "111":pue=ued.findByNameLikeAndCellPhoneAndEmail(name, cellPhone, email, pageable);
+                break;
+        }
+        return pue;
     }
 }

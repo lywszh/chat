@@ -41,7 +41,7 @@ public class BackController extends BaseController {
     /**
      * 后台的登录页面
      *
-     * @return
+     * @return 页面
      */
     @GetMapping("/login")
     public String login(Model model) {
@@ -51,7 +51,7 @@ public class BackController extends BaseController {
 
     /**
      * 后台首页
-     *
+     *@param model 页面需要的数据封装
      * @return 页面
      */
     @GetMapping("/index")
@@ -64,8 +64,8 @@ public class BackController extends BaseController {
     /**
      * 用户管理页面
      *
-     * @param model
-     * @return
+     * @param model 页面需要的数据封装
+     * @return 页面
      */
     @GetMapping("/userManager")
     public String userManager(Model model) {
@@ -86,7 +86,7 @@ public class BackController extends BaseController {
     @PostMapping("/listUser")
     @ResponseBody
     public JsonResult listUserByPage(String name, String cellPhone, String email, int page, int size) {
-        Pageable pageable = new PageRequest(page, size, new Sort(Sort.Direction.ASC, "id"));
+        Pageable pageable = new PageRequest(page-1, size, new Sort(Sort.Direction.ASC, "id"));
         Page<UserExtra> pue = us.listUser(name, cellPhone, email, pageable);
         return new JsonResult().success().dataObj(pue);
     }
