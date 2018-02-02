@@ -4,7 +4,6 @@ $(function () {
          * @param page
          */
         let loadUserList = function (page) {
-            console.log("reloadUserList");
             let name = $("#search-name").val().trim();
             let cellPhone = $("#search-cellPhone").val().trim();
             let email = $("#search-email").val().trim();
@@ -15,7 +14,6 @@ $(function () {
                     success: function (res) {
                         if (res.result) {
                             let dataObj = res.dataObj;
-                            console.log(dataObj);
                             loadPersonData(dataObj.content);
                             loadTotalData(dataObj.totalElements);
                             loadPaging(dataObj);
@@ -93,14 +91,13 @@ $(function () {
         /**
          * 点击按钮，重新加载数据
          */
-        $("button").on("click", " #reSearch", function () {
-            console.log("reSearch");
+        $("#userlist-inputrow").on("click", " #reSearch", function () {
             loadUserList(1);
         });
         /**
          * 点击页码的时候加载
          */
-        $("body").on("click", ".reLoadByPaging", function () {
+        $("#userlist-paging").on("click", ".reLoadByPaging", function () {
             let currPage =$(this).data("index");
             loadUserList(currPage);
         });
