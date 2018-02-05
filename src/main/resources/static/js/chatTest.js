@@ -12,7 +12,6 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
 }
 
 function connect() {
