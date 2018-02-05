@@ -75,6 +75,18 @@ public class BackController extends BaseController {
     }
 
     /**
+     * 聊天测试页面
+     * @param model 页面需要的数据封装
+     * @return 页面
+     */
+    @GetMapping("/chatTest")
+    public String chatTest(Model model){
+        model.addAttribute("title", "聊天测试");
+        model.addAttribute("page", "chatTest");
+        return "chatTest";
+    }
+
+    /**
      * 分页查询用户数据
      * @param name 用户名
      * @param cellPhone 用户手机号

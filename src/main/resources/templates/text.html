@@ -15,6 +15,9 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+
+    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 <body>
 <nav th:fragment="nav" class="navbar navbar-inverse">
@@ -59,219 +62,88 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid" style="display: none">
+<div class="container-fluid">
     <div class="panel panel-default">
-        <div class="panel-heading">用户统计</div>
+        <div class="panel-heading">模拟测试</div>
         <div class="panel-body">
             <div class="col-lg-4">
-                <p>用户数量：3002</p>
+                <p>当前状态：<span id="qq">已连接</span></p>
             </div>
             <div class="col-lg-4">
-                <p>当前在线：112</p>
+                <button class="btn btn-info " type="button">连接</button>
             </div>
             <div class="col-lg-4">
-                <p>当前时间：2018-1-31T19:20:31</p>
+                <button class="btn btn-info " type="button">断开</button>
             </div>
         </div>
     </div>
     <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">用户数据</div>
         <div class="panel-body">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">用户名</span>
-                        <input type="text" class="form-control" placeholder="username" aria-describedby="basic-addon1">
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon2">手机</span>
-                        <input type="text" class="form-control" placeholder="cellPhone" aria-describedby="basic-addon1">
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-                <div class="col-lg-3">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon3">邮箱</span>
-                        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon1">
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-                <div class="col-lg-1">
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default ">搜索</button>
-                        </div><!-- /btn-group -->
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-            </div><!-- /.row -->
-        </div>
-        <div class="table-responsive">
-            <!-- Table -->
-            <table class="table table-striped table-bordered ">
-                <thead>
-                <tr>
-                    <th class="col-md-1">ID</th>
-                    <th class="col-md-2">用户名</th>
-                    <th class="col-md-3">手机</th>
-                    <th class="col-md-2">邮箱</th>
-                    <th class="col-md-2">密码</th>
-                    <th class="col-md-2">功能</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>图么都</td>
-                    <td>13777823481</td>
-                    <td>lywszh@vip.qq.com</td>
-                    <td>111111</td>
-                    <td>
-                        <button class="btn btn-success " type="button">允许登陆</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>图么都2</td>
-                    <td>13777823482</td>
-                    <td>lywszh@vip.qq.com</td>
-                    <td>123456</td>
-                    <td>
-                        <button class="btn btn-warning " type="button">禁止登陆</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="panel-footer">
-            <nav aria-label="...">
-                <ul class="pagination pagination-sm">
-                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                    </li>
-                    <li class="active"><a href="#">1 </a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
-<div class="container-fluid" style="display: none">
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">好友管理</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon6">用户名</span>
-                        <input type="text" class="form-control" placeholder="username" aria-describedby="basic-addon1">
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-                <div class="col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon4">手机</span>
-                        <input type="text" class="form-control" placeholder="cellPhone" aria-describedby="basic-addon1">
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-                <div class="col-lg-3">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon5">邮箱</span>
-                        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon1">
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-                <div class="col-lg-1">
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default ">搜索</button>
-                        </div><!-- /btn-group -->
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-3 -->
-            </div><!-- /.row -->
-        </div>
-        <div class="table-responsive">
-            <!-- Table -->
-            <table class="table table-striped table-bordered ">
-                <thead>
-                <tr>
-                    <th class="col-md-1">ID</th>
-                    <th class="col-md-2">用户名</th>
-                    <th class="col-md-3">手机</th>
-                    <th class="col-md-2">邮箱</th>
-                    <th class="col-md-2">密码</th>
-                    <th class="col-md-2">功能</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>图么都</td>
-                    <td>13777823481</td>
-                    <td>lywszh@vip.qq.com</td>
-                    <td>111111</td>
-                    <td>
-                        <button class="btn btn-success " type="button">允许登陆</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>图么都2</td>
-                    <td>13777823482</td>
-                    <td>lywszh@vip.qq.com</td>
-                    <td>123456</td>
-                    <td>
-                        <button class="btn btn-warning " type="button">禁止登陆</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="panel-footer">
-            <nav aria-label="...">
-                <ul class="pagination pagination-sm">
-                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                    </li>
-                    <li class="active"><a href="#">1 </a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <form class="form-signin">
-        <div class="col-lg-4">
-        </div>
-        <div class="col-lg-4">
-            <h2 class="form-signin-heading">欢迎登录</h2>
-            <input type="email" id="inputPhoneOrEmail" class="form-control" placeholder="手机或邮箱" required="true"
-                   autofocus="true"/>
-            <input type="password" id="inputPassword" class="form-control" placeholder="密码" required="true"/>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
+            <div class="col-lg-6">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="connect">WebSocket connection:</label>
+                        <button id="connect" class="btn btn-default" type="submit">Connect</button>
+                        <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+                        </button>
+                    </div>
+                </form>
             </div>
-            <button class="btn btn-lg btn-default btn-block" type="button">登录</button>
         </div>
-        <div class="col-lg-4">
-        </div>
-    </form>
+    </div>
 </div>
 </body>
+<script>
+    //  /msg/sendcommuser
+    var stompClient = null;
+    //传递用户key值
+
+    function setConnected(connected) {
+        $("#connect").prop("disabled", connected);
+        $("#disconnect").prop("disabled", !connected);
+        if (connected) {
+            $("#conversation").show();
+        }
+        else {
+            $("#conversation").hide();
+        }
+        $("#greetings").html("");
+    }
+
+    function connect() {
+        var socket = new SockJS('/chatEndpoint');
+        var stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            setConnected(true);
+            console.log('Connected: ' + frame);
+            // stompClient.subscribe('/user/topic/greetings', function (greeting) {
+            //     showGreeting(JSON.parse(greeting.body).content);
+            // });
+        },function (error) {
+            console.log('error: '+error);
+        });
+    }
+
+    function disconnect() {
+        if (stompClient != null) {
+            stompClient.disconnect();
+        }
+        setConnected(false);
+        console.log("Disconnected");
+    }
+
+    $(function () {
+        $("form").on('submit', function (e) {
+            e.preventDefault();
+        });
+        $("#connect").click(function () {
+            connect();
+        });
+        $("#disconnect").click(function () {
+            disconnect();
+        });
+
+    });
+
+</script>
 </html>

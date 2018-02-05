@@ -1,5 +1,6 @@
-package com.kinoymir.chat.config;
+package com.kinoymir.chat.config.websocket;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
@@ -19,11 +20,20 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         /**
          * 表示客户端订阅地址的前缀信息，也就是客户端接收服务端消息的地址的前缀信息
          */
-        config.enableSimpleBroker("/chat-accept");
+        config.enableSimpleBroker("/chat-topic");
         /**
          * 指服务端接收地址的前缀，意思就是说客户端给服务端发消息的地址的前缀
          */
-        config.setApplicationDestinationPrefixes("/chat-msg");
+        config.setApplicationDestinationPrefixes("/chat-app");
+    }
+
+    @Bean
+    public SocketSessionRegistry SocketSessionRegistry(){
+        return new SocketSessionRegistry();
+    }
+    @Bean
+    public STOMPConnectEventListener STOMPConnectEventListener(){
+        return new STOMPConnectEventListener();
     }
 
 }
