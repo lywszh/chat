@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class SocketSessionRegistry {
 
-    private final ConcurrentMap<String, String> userSessionIds = new ConcurrentHashMap();
+    private final ConcurrentMap<String, String> userSessionIds = new ConcurrentHashMap<String, String>();
 
     public SocketSessionRegistry() {
     }
