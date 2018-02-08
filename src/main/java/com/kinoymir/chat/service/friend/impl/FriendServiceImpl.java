@@ -102,7 +102,7 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public void delApplyById(Long id) {
         FriendApply fa = findApplyById(id);
-        fad.delete(id);
+        fad.delete(fa);
     }
 
     /**
