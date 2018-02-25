@@ -23,7 +23,7 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/user/chat-subscibe/private',function(msg){
-            addPmsg(msg);
+            addPmsg(msg.body);
             console.log(msg);
         });
     }, function (error) {
