@@ -16,11 +16,15 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class FriendServiceImpl implements FriendService {
-    @Autowired
-    private FriendApplyDao fad;
+    private final FriendApplyDao fad;
+
+    private final FriendShipDao fsd;
 
     @Autowired
-    private FriendShipDao fsd;
+    public FriendServiceImpl(FriendApplyDao fad, FriendShipDao fsd) {
+        this.fad = fad;
+        this.fsd = fsd;
+    }
 
 
     /**

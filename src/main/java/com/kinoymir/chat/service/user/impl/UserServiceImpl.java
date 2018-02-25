@@ -23,11 +23,15 @@ import com.kinoymir.chat.service.user.UserService;
 public class UserServiceImpl implements UserService {
 
 
-    @Autowired
-    private UserDao ud;
+    private final UserDao ud;
+
+    private final UserExtraDao ued;
 
     @Autowired
-    private UserExtraDao ued;
+    public UserServiceImpl(UserDao ud, UserExtraDao ued) {
+        this.ud = ud;
+        this.ued = ued;
+    }
 
     /**
      * 用户注册
