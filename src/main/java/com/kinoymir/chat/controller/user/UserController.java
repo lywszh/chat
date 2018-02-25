@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
+    private final UserService us;
+
     @Autowired
-    private UserService us;
+    public UserController(UserService us) {
+        this.us = us;
+    }
 
     /**
      * 用户尚且没有登录，无法访问页面

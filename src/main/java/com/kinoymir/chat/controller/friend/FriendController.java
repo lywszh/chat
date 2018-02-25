@@ -15,8 +15,12 @@ import java.util.List;
 @RequestMapping("/friend")
 public class FriendController extends BaseController {
 
+    private final FriendService fs;
+
     @Autowired
-    private FriendService fs;
+    public FriendController(FriendService fs) {
+        this.fs = fs;
+    }
 
     /**
      * 新建好友申请

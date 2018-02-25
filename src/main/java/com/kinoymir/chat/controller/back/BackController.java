@@ -24,8 +24,12 @@ import com.kinoymir.chat.service.user.UserService;
 @RequestMapping("/back")
 public class BackController extends BaseController {
 
+    private final UserService us;
+
     @Autowired
-    private UserService us;
+    public BackController(UserService us) {
+        this.us = us;
+    }
 
     /**
      * 后台模板页面

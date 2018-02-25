@@ -11,16 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/chat/private")
+@RequestMapping("/privateChat")
 public class PrivateChatController extends BaseController {
 
-    @Autowired
-    private UserService us;
+    private final UserService us;
+
+    private final SimpMessagingTemplate smt;
 
     @Autowired
-    private SimpMessagingTemplate smt;
-
-
+    public PrivateChatController(UserService us, SimpMessagingTemplate smt) {
+        this.us = us;
+        this.smt = smt;
+    }
 
     @MessageMapping("/str")
     public void sendMsg(PrivateMsg msg) {
