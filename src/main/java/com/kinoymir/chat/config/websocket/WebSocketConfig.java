@@ -12,7 +12,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chatEndpoint").withSockJS();
+        registry.addEndpoint("/webSocketServer").setAllowedOrigins("*").withSockJS();
     }
 
     @Override
@@ -20,11 +20,11 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         /*
           表示客户端订阅地址的前缀信息，也就是客户端接收服务端消息的地址的前缀信息
          */
-        config.enableSimpleBroker("/chat-subscibe");
+        config.enableSimpleBroker("/topic","/queue");
         /*
           指服务端接收地址的前缀，意思就是说客户端给服务端发消息的地址的前缀
          */
-        config.setApplicationDestinationPrefixes("/chat");
+        config.setApplicationDestinationPrefixes("/app");
     }
 
     @Bean

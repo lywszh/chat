@@ -26,7 +26,7 @@ public class PrivateChatController extends BaseController {
     public void sendMsg(PrivateMsg msg) {
         System.out.println(msg);
         UserExtra ue = this.us.findByUserId(msg.getReceiverId());
-        smt.convertAndSendToUser(msg.getReceiverId().toString(),"/chat-subscibe/private",msg);
+        smt.convertAndSendToUser(msg.getReceiverId().toString(),"/queue",msg);
 
 
     }

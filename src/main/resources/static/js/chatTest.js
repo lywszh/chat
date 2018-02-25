@@ -17,19 +17,18 @@ function setConnected(connected) {
 }
 
 function connect() {
-    let socket = new SockJS('/chatEndpoint');
+    let socket = new SockJS('/webSocketServer');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/user/chat-subscibe/private',function(msg){
+        stompClient.subscribe('/user/queue',function(msg){
             addPmsg(msg.body);
             console.log(msg);
         });
     }, function (error) {
         console.log('error: ' + error);
     });
-    console.log("hihihi");
     console.log(stompClient);
 }
 
@@ -48,7 +47,7 @@ function addPmsg(msg){
 }
 
 function chatTest(userId,msg){
-    stompClient.send("/chat/str",{},JSON.stringify({'receiverId':userId,'msg':msg}));
+    stompClient.send("/app/str",{},JSON.stringify({'receiverId':userId,'msg':msg}));
 }
 
 
