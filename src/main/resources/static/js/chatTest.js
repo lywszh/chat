@@ -1,5 +1,5 @@
 //  /msg/sendcommuser
-var stompClient = null;
+let stompClient = null;
 
 //传递用户key值
 
@@ -7,22 +7,30 @@ function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
     if (connected) {
+        $("#connect-status").html("已连接");
         $("#conversation").show();
     }
     else {
+        $("#connect-status").html("已断开");
         $("#conversation").hide();
     }
 }
 
 function connect() {
-    var socket = new SockJS('/chatEndpoint');
-    var stompClient = Stomp.over(socket);
+    let socket = new SockJS('/chatEndpoint');
+    stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
+        stompClient.subscribe('/user/chat-subscibe/private',function(msg){
+            addPmsg(msg);
+            console.log(msg);
+        });
     }, function (error) {
         console.log('error: ' + error);
     });
+    console.log("hihihi");
+    console.log(stompClient);
 }
 
 function disconnect() {
@@ -32,6 +40,17 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
+
+function addPmsg(msg){
+    let msgs=$("#private-msgs");
+    let newMsg=$("<p></p>").html(msg);
+    msgs.append(newMsg);
+}
+
+function chatTest(userId,msg){
+    stompClient.send("/chat/str",{},JSON.stringify({'receiverId':userId,'msg':msg}));
+}
+
 
 $(function () {
     $("form").on('submit', function (e) {
@@ -45,3 +64,5 @@ $(function () {
     });
 
 });
+
+

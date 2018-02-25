@@ -17,14 +17,14 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        /**
-         * 表示客户端订阅地址的前缀信息，也就是客户端接收服务端消息的地址的前缀信息
+        /*
+          表示客户端订阅地址的前缀信息，也就是客户端接收服务端消息的地址的前缀信息
          */
-        config.enableSimpleBroker("/chat-topic");
-        /**
-         * 指服务端接收地址的前缀，意思就是说客户端给服务端发消息的地址的前缀
+        config.enableSimpleBroker("/chat-subscibe");
+        /*
+          指服务端接收地址的前缀，意思就是说客户端给服务端发消息的地址的前缀
          */
-        config.setApplicationDestinationPrefixes("/chat-app");
+        config.setApplicationDestinationPrefixes("/chat");
     }
 
     @Bean

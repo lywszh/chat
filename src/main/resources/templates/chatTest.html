@@ -9,27 +9,20 @@
         <div class="panel-heading">模拟测试</div>
         <div class="panel-body">
             <div class="col-lg-4">
-                <p>当前状态：<span id="qq">已连接</span></p>
+                <p>当前状态：<span id="connect-status">已断开</span></p>
             </div>
             <div class="col-lg-4">
-                <button class="btn btn-info " type="button">连接</button>
+                <button class="btn btn-info " id="connect" type="button">连接</button>
             </div>
             <div class="col-lg-4">
-                <button class="btn btn-info " type="button">断开</button>
+                <button class="btn btn-info " id="disconnect"  type="button" disabled="disabled">断开</button>
             </div>
         </div>
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="col-lg-6">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="connect">WebSocket connection:</label>
-                        <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                        <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                        </button>
-                    </div>
-                </form>
+            <div class="col-lg-6" id="private-msgs">
+
             </div>
         </div>
     </div>
