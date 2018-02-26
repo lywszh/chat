@@ -40,5 +40,34 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     public STOMPConnectEventListener STOMPConnectEventListener() {
         return new STOMPConnectEventListener();
     }
+    /**
+     * 暂时不使用这个写法
+    @Override
+    public void configureWebSocketTransport(final WebSocketTransportRegistration registration) {
+        registration.addDecoratorFactory(new WebSocketHandlerDecoratorFactory() {
+            @Override
+            public WebSocketHandler decorate(final WebSocketHandler handler) {
+                return new WebSocketHandlerDecorator(handler) {
+                    @Override
+                    public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
+                        // 客户端与服务器端建立连接后，此处记录谁上线了
+                        String username = session.getPrincipal().getName();
+                        log.info("online: " + username);
+                        super.afterConnectionEstablished(session);
+                    }
 
+                    @Override
+                    public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+                        // 客户端与服务器端断开连接后，此处记录谁下线了
+                        String username = session.getPrincipal().getName();
+                        log.info("offline: " + username);
+                        super.afterConnectionClosed(session, closeStatus);
+                    }
+                };
+            }
+        });
+        super.configureWebSocketTransport(registration);
+    }
+
+    */
 }

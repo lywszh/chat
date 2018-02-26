@@ -74,6 +74,7 @@ public class ShiroConfig {
          * 后台登录页
          */
         filterChainDefinitionMap.put("/back/login", "anon");
+        filterChainDefinitionMap.put("/back/index", "anon");
         //不需要验证身份
         //filterChainDefinitionMap.put("/user", "anon");
 
