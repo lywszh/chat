@@ -24,7 +24,6 @@ function connect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/user/queue',function(msg){
             addPmsg(msg.body);
-            console.log(msg);
         });
     }, function (error) {
         console.log('error: ' + error);

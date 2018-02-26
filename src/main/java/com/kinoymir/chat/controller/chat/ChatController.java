@@ -29,17 +29,10 @@ public class ChatController extends BaseController {
      * @param msg
      */
     @MessageMapping("/str")
-    public void sendMsg(Principal userId, @Validated @ModelAttribute PrivateMsg msg) {
-        System.out.println(msg);
+    public void sendMsg(Principal userId, @ModelAttribute PrivateMsg msg) {
         pcs.sendMsg(new Long(userId.getName()),msg);
     }
 
 
-    /*
-    @GetMapping("/info")
-    public ConcurrentMap getWebSocketInfo(){
-        ConcurrentMap<String, String> ids = ssr.getAllSessionIds();
-        return ids;
-    }
-    */
+
 }
