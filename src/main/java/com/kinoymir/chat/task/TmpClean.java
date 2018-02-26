@@ -31,7 +31,7 @@ public class TmpClean {
         try {
             deleteFolder(file);
         } catch (Exception e) {
-            logger.warn("清理临时文件夹失败");
+            logger.warn("清理临时文件夹失败 {}",e.getMessage());
             e.printStackTrace();
         }
     }
@@ -60,7 +60,7 @@ public class TmpClean {
         long modifiedTime = file.lastModified();
         long currentTime = System.currentTimeMillis();
         // 设置最后一次修改的时间
-        long daysBetween = (currentTime - modifiedTime) / (1000 * 60);
-        return daysBetween >= CLEAN_MINUTE ? true : false;
+        long minsBetween = (currentTime - modifiedTime) / (1000 * 60);
+        return minsBetween >= CLEAN_MINUTE ? true : false;
     }
 }

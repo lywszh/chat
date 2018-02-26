@@ -59,6 +59,9 @@ public class BackController extends BaseController {
      */
     @GetMapping("/index")
     public String index(Model model) {
+        if(getUserIdFromCache()==null){
+            return "redirect:login";
+        }
         model.addAttribute("title", "首页");
         model.addAttribute("page", "index");
         return "index";

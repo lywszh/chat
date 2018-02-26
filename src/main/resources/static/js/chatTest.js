@@ -47,7 +47,7 @@ function addPmsg(msg){
 }
 
 function chatTest(userId,msg){
-    stompClient.send("/app/str",{},JSON.stringify({'receiverId':userId,'msg':msg}));
+    stompClient.send("/app/str",{},JSON.stringify({'receiverId':userId,'msg':msg,'msgType':'text'}));
 }
 
 
