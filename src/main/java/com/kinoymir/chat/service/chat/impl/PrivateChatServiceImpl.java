@@ -43,11 +43,12 @@ public class PrivateChatServiceImpl implements PrivateChatService {
      */
     @Override
     public void sendMsg(Long sendId,PrivateMsg msg) {
-        if(sendId==null){
+        Long receiverId=msg.getReceiverId();
+        if(receiverId==null){
             throw new ChatRuntimeException("发送对象为空");
         }
         /*
-        Long receiverId=msg.getReceiverId();
+
         后期加一个如果不是好友，就不能发送的限制
         */
 

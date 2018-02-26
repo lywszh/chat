@@ -20,11 +20,9 @@ import javax.persistence.Enumerated;
 public class PrivateMsg extends BaseEntity{
 
     private Long sendId;
-    @NotBlank(message = "接受者不可为空")
+
     private Long receiverId;
 
-    @NotBlank(message = "消息内容不可为空")
-    @Length(max=255,message = "消息过长")
     private String msg;
 
     @Enumerated(EnumType.STRING)

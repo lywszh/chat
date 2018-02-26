@@ -1,7 +1,7 @@
 package com.kinoymir.chat.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.kinoymir.chat.config.TimeConverter;
+import com.kinoymir.chat.config.system.TimeConverter;
 import lombok.Data;
 
 import javax.persistence.*;

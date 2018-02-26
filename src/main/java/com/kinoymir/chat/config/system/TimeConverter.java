@@ -1,4 +1,4 @@
-package com.kinoymir.chat.config;
+package com.kinoymir.chat.config.system;
 
 import javax.persistence.AttributeConverter;
 import java.sql.Timestamp;

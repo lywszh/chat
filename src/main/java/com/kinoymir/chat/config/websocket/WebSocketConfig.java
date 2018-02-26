@@ -1,15 +1,36 @@
 package com.kinoymir.chat.config.websocket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
+import org.springframework.web.socket.handler.WebSocketHandlerDecorator;
+import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
+
 
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
+
+    private static Logger log= LoggerFactory.getLogger(WebSocketConfig.class);
+
+    @Autowired
+    private SocketSessionRegistry ssr;
+
+    @Bean
+    public SocketSessionRegistry SocketSessionRegistry() {
+        return new SocketSessionRegistry();
+    }
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/webSocketServer").setAllowedOrigins("*").withSockJS();
@@ -31,17 +52,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         config.setUserDestinationPrefix("/user/");
     }
 
-    @Bean
-    public SocketSessionRegistry SocketSessionRegistry() {
-        return new SocketSessionRegistry();
-    }
 
-    @Bean
-    public STOMPConnectEventListener STOMPConnectEventListener() {
-        return new STOMPConnectEventListener();
-    }
-    /**
-     * 暂时不使用这个写法
     @Override
     public void configureWebSocketTransport(final WebSocketTransportRegistration registration) {
         registration.addDecoratorFactory(new WebSocketHandlerDecoratorFactory() {
@@ -52,7 +63,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
                     public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
                         // 客户端与服务器端建立连接后，此处记录谁上线了
                         String username = session.getPrincipal().getName();
-                        log.info("online: " + username);
+                        ssr.registerSessionId(username,session.getId());
                         super.afterConnectionEstablished(session);
                     }
 
@@ -60,7 +71,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
                     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
                         // 客户端与服务器端断开连接后，此处记录谁下线了
                         String username = session.getPrincipal().getName();
-                        log.info("offline: " + username);
+                        ssr.unregisterSessionId(username, session.getId());
                         super.afterConnectionClosed(session, closeStatus);
                     }
                 };
@@ -69,5 +80,5 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         super.configureWebSocketTransport(registration);
     }
 
-    */
+
 }

@@ -3,6 +3,7 @@ package com.kinoymir.chat.config.shiro;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -21,6 +22,9 @@ public class ShiroConfig {
         securityManager.setRealm(chatRealm());
         //注入记住我管理器  
         securityManager.setRememberMeManager(rememberMeManager());
+
+        //将SecurityManager设置到系统运行环境
+        SecurityUtils.setSecurityManager(securityManager);
         return securityManager;
     }
 

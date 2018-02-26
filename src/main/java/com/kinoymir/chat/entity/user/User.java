@@ -1,7 +1,7 @@
 package com.kinoymir.chat.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.kinoymir.chat.config.TimeConverter;
+import com.kinoymir.chat.config.system.TimeConverter;
 import com.kinoymir.chat.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

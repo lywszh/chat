@@ -1,4 +1,4 @@
-package com.kinoymir.chat.config;
+package com.kinoymir.chat.config.system;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
