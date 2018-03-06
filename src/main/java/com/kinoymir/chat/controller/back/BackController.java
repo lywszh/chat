@@ -38,7 +38,7 @@ public class BackController extends BaseController {
      */
     @GetMapping("/template")
     public String template() {
-        return "template";
+        return "common/backTemplate";
     }
 
     /**
@@ -49,7 +49,7 @@ public class BackController extends BaseController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("title", "登录");
-        return "login";
+        return "back/login";
     }
 
     /**
@@ -64,7 +64,7 @@ public class BackController extends BaseController {
         }
         model.addAttribute("title", "首页");
         model.addAttribute("page", "index");
-        return "index";
+        return "back/index";
     }
 
     /**
@@ -77,7 +77,7 @@ public class BackController extends BaseController {
     public String userManager(Model model) {
         model.addAttribute("title", "用户管理");
         model.addAttribute("page", "userManager");
-        return "userManager";
+        return "back/userManager";
     }
 
     /**
@@ -89,7 +89,7 @@ public class BackController extends BaseController {
     public String chatTest(Model model){
         model.addAttribute("title", "聊天测试");
         model.addAttribute("page", "chatTest");
-        return "chatTest";
+        return "back/chatTest";
     }
 
     /**
